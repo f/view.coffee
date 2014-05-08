@@ -59,7 +59,7 @@ class ModelView extends View
     super data
     @text @text().toUpperCase()
 
-modelView = new ModelView()
+modelView = new ModelView name: "f"
 ```
 
 ---

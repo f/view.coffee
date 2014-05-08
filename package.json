@@ -1,6 +1,6 @@
 {
   "name": "view.coffee",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Dead Simple, Vanilla-ish Client Side Framework",
   "main": "src/view.js",
   "scripts":{
