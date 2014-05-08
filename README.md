@@ -63,6 +63,11 @@ modelView = new ModelView()
 ```
 
 ---
+
+Developed at [@webBoxio][1] with <3
+
 ## License
 
 MIT.
+
+[1]: http://webbox.io
