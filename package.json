@@ -1,6 +1,6 @@
 {
   "name": "view.coffee",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "src/view.js",
   "scripts":{
     "install": "./node_modules/.bin/coffee -cb src/*.coffee tests/*.coffee",
