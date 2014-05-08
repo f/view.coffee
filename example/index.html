@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <title>Example</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>View.coffee Simple Example</h2>
+      <form action="" id="search">
+        <input type="search" name="query" id="query" placeholder="Search">
+        <span id="text"></span>
+      </form>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/coffeescript" src="../src/view.coffee"></script>
+    <script type="text/coffeescript" charset="utf-8">
+      class Search extends View
+
+        template: -> "#search"
+
+        constructor: ->
+          super
+          @on "submit", @bind @doSearch
+          @on "keyup", @bind @write
+
+        doSearch: (e)->
+          searchValue = @find("#query").val()
+          # do the job...
+          console.log "search #{searchValue}"
+          e.preventDefault()
+
+        write: ->
+          @find("#text").text @find("#query").val()
+
+      # View communication
+      class MyApp extends View
+
+        # Write the selector
+        template: -> "#app"
+
+        constructor: ->
+          super
+          search = new Search()
+          search.on "submit", (e)=>
+            console.log "another binding"
+            e.preventDefault()
+
+      app = new MyApp()
+    </script>
+    <script src="http://coffeescript.org/extras/coffee-script.js"></script>
+  </body>
+</html>

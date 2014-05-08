@@ -1,0 +1,14 @@
+{
+  "framework": "mocha+chai",
+  "before_tests": "./node_modules/.bin/coffee -cb src/*.coffee tests/*.coffee",
+  "on_exit": "rm src/*.js tests/*.js",
+  "src_files": [
+    "src/**/*.js",
+    "tests/**/*.js"
+  ],
+  "serve_files": [
+    "http://code.jquery.com/jquery-latest.min.js",
+    "src/**/*.js",
+    "tests/**/*.js"
+  ]
+}
