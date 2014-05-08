@@ -1,4 +1,10 @@
 {
+  "name": "view-coffee",
+  "main": "src/view.js",
+  "scripts":{
+    "install": "./node_modules/.bin/coffee -cb src/*.coffee tests/*.coffee",
+    "test": "./node_modules/.bin/testem"
+  },
   "devDependencies": {
     "testem": "^0.6.15",
     "mocha": "^1.18.2",
