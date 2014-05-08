@@ -9,6 +9,12 @@ with **jQuery** but it makes your code becomes too ugly?
 
 Then maybe you should try **View.coffee**.
 
+  - Use *all* of the jQuery instance methods in your View class, because it's jQuery instance.
+  - Manage the events. Improve readability.
+  - Seperate your View logic. Use it like MV*.
+  - Use it another libraries, there is no conflict.
+  - And the best; too simple. (Source code is only **8** lines of code)
+
 ```coffeescript
 class Search extends View
 
@@ -38,6 +44,22 @@ class MyApp extends View
       e.preventDefault()
 
 app = new MyApp()
+```
+
+## Generating Views
+
+```coffeescript
+class ModelView extends View
+  template: ({name})-> """
+  <div>
+    Hello #{name}
+  </div>
+  """
+  constructor: (data)->
+    super data
+    @text @text().toUpperCase()
+
+modelView = new ModelView()
 ```
 
 ---
