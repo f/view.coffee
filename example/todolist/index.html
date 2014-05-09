@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <title>Example</title>
+  </head>
+  <body>
+    <div id="todolist">
+      <form id="add-todo">
+        <input type="text" id="input" value="" placeholder="Write Todo">
+      </form>
+      <ul id="todo-list">
+        <!-- todos -->
+      </ul>
+    </div>
+
+    <script src="../asset/jquery-latest.min.js"></script>
+    <script type="text/coffeescript" src="../../src/view.coffee"></script>
+    <script type="text/coffeescript" charset="utf-8">
+      class Todo extends View
+
+        title: ""
+        isCompleted: no
+
+        template: -> """
+          <li><input type="checkbox" value=""> #{@title}</li>
+          """
+
+        constructor: ({@title})->
+          super
+          @on "click", "input:checkbox", @bind @toggleComplete
+
+        toggleComplete: ->
+          @isCompleted = not @isCompleted
+          @css opacity: (if @isCompleted then 0.5 else 1)
+
+      class TodoForm extends View
+        template: -> "#add-todo"
+
+        constructor: ->
+          super
+          @on "submit", @bind (event)=>
+            $title = $ "#add-todo :input"
+            title = $title.val()
+            $title.val ""
+            todo = new Todo {title}
+
+            @trigger "todo:add", todo
+            event.preventDefault()
+
+      class TodoList extends View
+        template: -> "#todolist"
+
+        constructor: ->
+          super
+          @form = new TodoForm()
+          @form.on "todo:add", (event, todo)=>
+            @append todo
+
+      app = new TodoList()
+      window.Todo = Todo
+    </script>
+    <script src="../asset/coffee-script.js"></script>
+  </body>
+</html>
