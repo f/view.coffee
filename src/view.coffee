@@ -7,7 +7,8 @@ class View extends jQuery
   # Basically jQuery initialization.
   constructor: (data={}, template=@template)->
     super
-    @self = $ $.proxy(template, this) data
+    template = data if typeof data is 'function'
+    @self = $ do $.proxy template, this, data
     @init.call this, @self
 
     # bind all methods to element
