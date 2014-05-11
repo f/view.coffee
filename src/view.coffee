@@ -4,14 +4,15 @@ class View extends jQuery
   # Basically jQuery Selector. But can be used as template.
   template: (data)-> "<div>#{data}</div>"
 
-  # Just an helper. Delete if you don't like :P
-  bind: (method)-> method.bind @self
-
   # Basically jQuery initialization.
-  constructor: (data)->
+  constructor: (data={}, template=@template)->
     super
-    @init.call this, @template(data)
-    @self = $ this
+    @self = $ $.proxy(template, this) data
+    @init.call this, @self
+
+    # bind all methods to element
+    for method, func of this
+      @[method] = $.proxy func, @self if typeof func is 'function'
 
 window.View = View
 # fin.

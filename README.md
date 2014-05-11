@@ -1,6 +1,6 @@
 # View.coffee
 
-**Dead Simple, Vanilla-ish** Client-Side Framework based on *jQuery*, inspired by GitHub's Space-Pen Library
+**Dead Simple, Vanilla-ish** Client-Side Framework based on *jQuery*
 
 ## Manage Views like a boss.
 
@@ -13,7 +13,9 @@ Then maybe you should try **View.coffee**.
   - Manage the events. Improve readability.
   - Seperate your View logic. Use it like MV*.
   - Use it another libraries, there is no conflict.
-  - And the best; too simple. (Source code is only **8** lines of code)
+  - And the best; too simple. (Source code is only **10 lines of CoffeeScript code**)
+
+## Usage
 
 ```coffeescript
 class Search extends View
@@ -62,9 +64,22 @@ class ModelView extends View
 modelView = new ModelView name: "f"
 ```
 
+## Custom Views
+
+```coffeescript
+class Item extends View
+  constructor: ->
+
+item = new Item title: "hello", (data)=> """
+  <div>
+    Hello #{data.title}
+  </div>
+  """
+```
+
 ---
 
-Developed at [@webBoxio][1] with <3
+Developed at [@webBoxio][1] with <3, inspired by GitHub's Space-Pen.
 
 ## License
 

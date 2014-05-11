@@ -7,7 +7,7 @@
     "tests/**/*.js"
   ],
   "serve_files": [
-    "http://code.jquery.com/jquery-latest.min.js",
+    "example/asset/jquery-latest.min.js",
     "src/**/*.js",
     "tests/**/*.js"
   ]

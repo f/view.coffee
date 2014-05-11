@@ -10,6 +10,7 @@
       <ul id="todo-list">
         <!-- todos -->
       </ul>
+      <button class="save">Save</button>
     </div>
 
     <script src="../asset/jquery-latest.min.js"></script>
@@ -20,42 +21,56 @@
         title: ""
         isCompleted: no
 
-        template: -> """
-          <li><input type="checkbox" value=""> #{@title}</li>
+        template: (data)-> """
+          <li><input type="checkbox" value=""> #{@prefix} #{@title}</li>
           """
 
-        constructor: ({@title})->
+        constructor: ({@title, @prefix})->
           super
-          @on "click", "input:checkbox", @bind @toggleComplete
+          @on "click", "input:checkbox", @toggleComplete
+
+          @data "title", @title
 
         toggleComplete: ->
           @isCompleted = not @isCompleted
-          @css opacity: (if @isCompleted then 0.5 else 1)
+          @css
+            textDecoration: if @isCompleted then 'line-through' else ''
+            opacity: if @isCompleted then 0.5 else 1
 
       class TodoForm extends View
-        template: -> "#add-todo"
 
-        constructor: ->
+        constructor: ({prefix})->
           super
-          @on "submit", @bind (event)=>
-            $title = $ "#add-todo :input"
+          @on "submit", (event)=>
+            $title = @find ":input"
+            console.log $title
             title = $title.val()
             $title.val ""
-            todo = new Todo {title}
+            todo = new Todo {title, prefix}
 
             @trigger "todo:add", todo
             event.preventDefault()
 
       class TodoList extends View
+
+        # data management
+        items: []
+
         template: -> "#todolist"
 
         constructor: ->
           super
-          @form = new TodoForm()
+          @form = new TodoForm prefix: 'Item:', => @find "#add-todo"
           @form.on "todo:add", (event, todo)=>
             @append todo
+            @items.push $(todo).data 'title'
+
+          @find(".save").on "click", =>
+            # connection to network
+            $.post '/save', todos: @items.join(), =>
 
       app = new TodoList()
+
       window.Todo = Todo
     </script>
     <script src="../asset/coffee-script.js"></script>
