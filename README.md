@@ -24,7 +24,7 @@ class Search extends View
 
   constructor: ->
     super
-    @on "submit", @bind @doSearch
+    @on "submit", @doSearch
 
   doSearch: (e)->
     searchValue = @find("#query").val()
